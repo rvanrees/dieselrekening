@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Dieselrekening.nl</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+<div class="max-w-xl mx-auto py-12 px-6">
+
+    <div class="bg-white rounded-2xl shadow p-8">
+
+        <h1 class="text-3xl font-bold mb-2">
+            Dieselrekening.nl
+        </h1>
+
+        <p class="text-gray-600 mb-8">
+            Bereken wat diesel kost voor jouw rit.
+        </p>
+
+        <form method="POST" class="space-y-6">
+
+            <div>
+                <label class="block font-medium mb-2">
+                    Afstand in kilometers
+                </label>
+
+                <input
+                    type="number"
+                    name="distance"
+                    step="0.01"
+                    required
+                    class="w-full border border-gray-300 rounded-lg px-4 py-3"
+                >
+            </div>
+
+            <div>
+                <label class="block font-medium mb-2">
+                    Verbruik in liter per 100 km
+                </label>
+
+                <input
+                    type="number"
+                    name="consumption"
+                    step="0.01"
+                    required
+                    class="w-full border border-gray-300 rounded-lg px-4 py-3"
+                >
+            </div>
+
+            <div>
+                <label class="block font-medium mb-2">
+                    Dieselprijs per liter
+                </label>
+
+                <input
+                    type="number"
+                    name="fuel_price"
+                    step="0.001"
+                    required
+                    class="w-full border border-gray-300 rounded-lg px-4 py-3"
+                >
+            </div>
+
+            <button
+                type="submit"
+                class="w-full bg-black text-white font-semibold rounded-lg py-3"
+            >
+                Berekenen
+            </button>
+
+        </form>
+
+        {% if result %}
+        <div class="mt-8 border-t pt-6">
+
+            <h2 class="text-xl font-bold mb-4">
+                Resultaat
+            </h2>
+
+            <div class="space-y-2">
+
+                <p>
+                    Benodigde diesel:
+                    <strong>
+                        {{ "%.2f"|format(result.liters) }} liter
+                    </strong>
+                </p>
+
+                <p>
+                    Dieselkosten:
+                    <strong>
+                        € {{ "%.2f"|format(result.costs) }}
+                    </strong>
+                </p>
+
+            </div>
+
+        </div>
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
